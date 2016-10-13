@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - stable
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
+  - 0.12
+cache:
+  directories:
+    - node_modules
+script:
+  - npm test
+after_script:
+  - npm install codecov babel-istanbul babel-cli
+  - ./node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- -t 5000 --recursive --compilers js:babel-core/register
+  - ./node_modules/.bin/codecov
