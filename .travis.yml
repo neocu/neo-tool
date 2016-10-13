@@ -13,5 +13,5 @@ cache:
 script:
   - npm test
 after_script:
-  - npm install istanbul --save-dev --verbose
-  - npm run coverage
+  - npm install codecov
+  - ./node_modules/.bin/codecov
