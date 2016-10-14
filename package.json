@@ -1,6 +1,6 @@
 {
   "name": "neo-tool",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "neo脚手架工具集",
   "main": "webpack.config.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "zhouyong@chinac.com",
   "license": "MIT",
   "bin": {
-	"neo": "./lib/index.js"
+    "neo": "./lib/index.js"
   },
   "bugs": {
     "url": "https://github.com/neocu/neo-tool/issues"
