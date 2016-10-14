@@ -4,8 +4,7 @@
   "description": "neo脚手架工具集",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -t 5000 --recursive --compilers js:babel-core/register",
-    "start": "node ./build/index.js"
+    "test": "./node_modules/mocha/bin/mocha -t 5000 --recursive --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -14,7 +13,7 @@
   "author": "zhouyong@chinac.com",
   "license": "MIT",
   "bin": {
-    "neo": "./bin/hello"
+    "neo": "./bin/neo"
   },
   "bugs": {
     "url": "https://github.com/neocu/neo-tool/issues"
@@ -32,5 +31,9 @@
     "mocha": "^3.1.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "string-template": "^1.0.0"
   }
 }

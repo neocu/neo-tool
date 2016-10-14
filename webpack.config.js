@@ -8,14 +8,14 @@ let BannerPlugin = webpack.BannerPlugin;
 //过滤node_modules中所有的模块
 var nodeModules = {};
 fs.readdirSync("node_modules")
-    .filter(function(x) {
-        return [".bin"].indexOf(x) === -1;
-    })
-    .forEach(function(mod) {
-        nodeModules[mod] = "commonjs " + mod;
-    });
+  .filter(function(x) {
+      return [".bin"].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+      nodeModules[mod] = "commonjs " + mod;
+  });
 
-    
+
 nodeModules["transform-runtime"] ="commonjs transform-runtime";
 nodeModules["stream"] ="commonjs stream";
 
@@ -48,14 +48,13 @@ module.exports = {
             //     path.resolve(__dirname, "node_modules"),
             // ]
             include: [
-                path.resolve(__dirname, "app"),
-                path.resolve(__dirname, "bin")
+                path.resolve(__dirname, "lib"),
             ]
-        }, 
-        {
-            test: /\.json$/,
-            loader: "json-loader"
-        }]
+        },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
+            }]
     },
     resolve: {
         extensions: ["", ".js", ".json"]
