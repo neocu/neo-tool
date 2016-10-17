@@ -1,0 +1,19 @@
+import Page from '../../components/page';
+import './{name}.less';
+
+class {className} extends React.Component {
+
+  static renderPage() {
+    return (<div>{name} page</div>);
+  }
+
+  render() {
+    return (
+      <Page className="neo-{name}">
+        {{className}.renderPage()}
+      </Page>
+    );
+  }
+}
+
+export default {className};
