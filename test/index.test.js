@@ -4,12 +4,12 @@
 // 支持ES6 语法
 const assert = require('assert');
 // import assert from 'assert';
-const test = require('../lib');
+const neo = require('../lib');
 
 describe('Demo test', () => {
-  describe('#indexOf()', () => {
-    it('should return -1 when the value is not present', () => {
-      assert.equal(test(), 'hello2');
+  describe('#getHello()', () => {
+    it('should return hello', () => {
+      assert.equal(neo.getHello(), 'hello');
     });
   });
 });

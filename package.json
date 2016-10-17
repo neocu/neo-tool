@@ -1,11 +1,10 @@
 {
   "name": "neo-tool",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "neo脚手架工具集",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -t 5000 --recursive --compilers js:babel-core/register",
-    "start": "node ./build/index.js"
+    "test": "./node_modules/mocha/bin/mocha -t 5000 --recursive --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -13,6 +12,9 @@
   },
   "author": "zhouyong@chinac.com",
   "license": "MIT",
+  "bin": {
+    "neo": "./bin/neo"
+  },
   "bugs": {
     "url": "https://github.com/neocu/neo-tool/issues"
   },
@@ -24,10 +26,16 @@
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-runtime": "^6.11.6",
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "mocha": "^3.1.2",
+    "source-map-support": "^0.4.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "string-template": "^1.0.0"
   }
 }
