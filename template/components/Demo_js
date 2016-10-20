@@ -1,0 +1,15 @@
+
+import './{name}.less';
+
+class {className} extends React.Component {
+
+  render() {
+    return (
+      <div className="neo-{name}">
+        {name}
+      </div>
+    );
+  }
+}
+
+export default {className};
