@@ -1,6 +1,6 @@
 {
   "name": "neo-tool",
-  "version": "0.0.4",
+  "version": "0.0.9",
   "description": "neo脚手架工具集",
   "main": "webpack.config.js",
   "scripts": {
@@ -30,12 +30,12 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "mocha": "^3.1.2",
-    "source-map-support": "^0.4.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0"
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "string-template": "^1.0.0"
+    "string-template": "^1.0.0",
+    "source-map-support": "^0.4.4"
   }
 }
