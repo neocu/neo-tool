@@ -2,7 +2,7 @@
  * Created by ssehacker on 2016/10/17.
  */
 import assert from 'assert';
-import {Readable, Duplex} from 'stream';
+import {Readable, Duplex, Writable} from 'stream';
 import ReplacePattern from '../lib/ReplacePattern';
 
 describe('ReplacePattern test', () => {
@@ -14,17 +14,29 @@ describe('ReplacePattern test', () => {
   });
 
   describe('#_transform', () => {
-    it('replace pattern', () => {
+    it('replace pattern', (done) => {
       let pattern = ReplacePattern.createInstance({name: 'zhouyong'});
+      let initStr = '{name} test....';
 
-      pattern.pipe(process.stdout);
+      let rs = new Readable();
+      rs.push(initStr);
+      rs.push(null);
 
-      setTimeout(() => {
-        pattern.write('{name} test....');
-        pattern.end();
-        pattern.write('after end method: {name}');
-      });
-      pattern.write('hello {name}');
+      let ws = new Writable();
+      let stash = '';
+      ws._write = function (chunk, enc, next) {
+        stash += chunk && chunk.toString() || '';
+        next && next();
+      };
+
+      rs
+        .pipe(pattern)
+        .pipe(ws)
+        .on('finish', function () {
+          if(stash === initStr.replace(/\{name\}/g, 'zhouyong')) {
+            done();
+          }
+        })
 
     })
   })
