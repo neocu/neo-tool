@@ -1,5 +1,5 @@
 
-import './{name}.less';
+import './{className}.less';
 
 class {className} extends React.Component {
 
