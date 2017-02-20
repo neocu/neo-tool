@@ -1,17 +1,29 @@
-import Page from '../../components/page';
+import '../../app/common.less';
 import './{className}.less';
+import SubPage from '../../components/subPage';
+import { error, success } from '../../components/dialog';
 
 class {className} extends React.Component {
 
-  static renderPage() {
-    return (<div>{name} page</div>);
+  constructor(props) {
+    super(props);
+    this.state = {
+      loaded: false,
+    };
+  }
+
+  componentDidMount() {
+    
   }
 
   render() {
+    const { loaded } = this.state;
     return (
-      <Page className="neo-{name}">
-        {{className}.renderPage()}
-      </Page>
+      <SubPage loaded={{loaded}} title="当前授权信息">
+        <div className="neo-{className}">
+          className
+        </div>
+      </SubPage>
     );
   }
 }

@@ -4,4 +4,4 @@
 
 import {className} from './{className}';
 
-ReactDOM.render((<{className} />), document.getElementById('app'));
+ReactDOM.render((<{className} />), document.querySelector('.neo-{className}') || document.querySelector('#app'));
