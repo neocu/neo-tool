@@ -8,7 +8,20 @@
 ### Usage
 
 ##### noe page
-将会根据模版创建新页面
+根据模版创建新页面
+```
+$ neo p index
+```
+
+创建新组件
+```
+$ neo c modal
+```
+
+查看帮助
+```
+$ neo --help
+```
 
 ### Development
 
