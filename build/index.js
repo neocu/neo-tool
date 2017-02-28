@@ -67,11 +67,11 @@ require("source-map-support").install();
 	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 	
 	var createParentDir = function () {
-	  var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(name, type) {
+	  var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(name, type) {
 	    var dirName;
-	    return _regenerator2.default.wrap(function _callee3$(_context3) {
+	    return _regenerator2.default.wrap(function _callee4$(_context4) {
 	      while (1) {
-	        switch (_context3.prev = _context3.next) {
+	        switch (_context4.prev = _context4.next) {
 	          case 0:
 	            dirName = 'pages';
 	
@@ -80,11 +80,11 @@ require("source-map-support").install();
 	            } else {
 	              dirName = 'components';
 	            }
-	            _context3.next = 4;
+	            _context4.next = 4;
 	            return new _promise2.default(function (resolve, reject) {
 	
 	              var dir = _path2.default.resolve('src', dirName, name);
-	              _fs2.default.mkdir(dir, function (err) {
+	              _fsExtra2.default.mkdir(dir, function (err) {
 	                if (err) {
 	                  console.error('Can\'t create directory:' + dir + '\n', err);
 	                  process.exit(1);
@@ -96,14 +96,14 @@ require("source-map-support").install();
 	
 	          case 4:
 	          case 'end':
-	            return _context3.stop();
+	            return _context4.stop();
 	        }
 	      }
-	    }, _callee3, this);
+	    }, _callee4, this);
 	  }));
 	
-	  return function createParentDir(_x3, _x4) {
-	    return _ref3.apply(this, arguments);
+	  return function createParentDir(_x4, _x5) {
+	    return _ref4.apply(this, arguments);
 	  };
 	}();
 	
@@ -111,9 +111,9 @@ require("source-map-support").install();
 	
 	var _commander2 = _interopRequireDefault(_commander);
 	
-	var _fs = __webpack_require__(/*! fs */ 71);
+	var _fsExtra = __webpack_require__(/*! fs-extra */ 71);
 	
-	var _fs2 = _interopRequireDefault(_fs);
+	var _fsExtra2 = _interopRequireDefault(_fsExtra);
 	
 	var _path = __webpack_require__(/*! path */ 72);
 	
@@ -135,7 +135,7 @@ require("source-map-support").install();
 	/**
 	 * Created by ssehacker on 2016/10/13.
 	 */
-	_commander2.default.command('page [name]').alias('p').description('Create new page').action(function () {
+	_commander2.default.command('page [name]').alias('p').description('create new page').action(function () {
 	  var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(name) {
 	    var isNeoProject;
 	    return _regenerator2.default.wrap(function _callee$(_context) {
@@ -171,7 +171,7 @@ require("source-map-support").install();
 	}());
 	
 	// create component.
-	_commander2.default.command('component [name]').alias('c').description('Create new component').action(function () {
+	_commander2.default.command('component [name]').alias('c').description('create new component').action(function () {
 	  var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(name) {
 	    var isNeoProject;
 	    return _regenerator2.default.wrap(function _callee2$(_context2) {
@@ -205,8 +205,58 @@ require("source-map-support").install();
 	  };
 	}());
 	
+	// init project
+	_commander2.default.command('init [name]').alias('i').description('init new project').action(function () {
+	  var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(name) {
+	    var dir, exist, moduleName, pattern, baseUrl, from;
+	    return _regenerator2.default.wrap(function _callee3$(_context3) {
+	      while (1) {
+	        switch (_context3.prev = _context3.next) {
+	          case 0:
+	            // 判断当前路径下是否已经存在文件夹为<name>
+	            dir = _path2.default.resolve(name);
+	            exist = _fsExtra2.default.existsSync(dir);
+	
+	            if (!exist) {
+	              _context3.next = 5;
+	              break;
+	            }
+	
+	            console.error('Error: folder was existed: ' + dir);
+	            return _context3.abrupt('return');
+	
+	          case 5:
+	            moduleName = '' + name.substring(0, 1).toUpperCase() + name.substring(1);
+	            pattern = {
+	              name: name,
+	              moduleName: moduleName
+	            };
+	            baseUrl = _path2.default.resolve(__dirname, '../');
+	            from = _path2.default.resolve(baseUrl, 'template', 'init');
+	
+	            copyFile(from, dir, pattern);
+	
+	            console.log('init completed!');
+	            /*fs.copy(from, dir, err => {
+	              if (err) return console.error(err);
+	              console.log('init project success.');
+	            });*/
+	
+	          case 11:
+	          case 'end':
+	            return _context3.stop();
+	        }
+	      }
+	    }, _callee3, undefined);
+	  }));
+	
+	  return function (_x3) {
+	    return _ref3.apply(this, arguments);
+	  };
+	}());
+	
 	//remove page
-	_commander2.default.command('rm [page]').description('Remove page').action(function (page) {
+	_commander2.default.command('rm [page]').description('remove page').action(function (page) {
 	  console.log('remove page: ' + page);
 	});
 	
@@ -232,19 +282,19 @@ require("source-map-support").install();
 	  try {
 	    var indexOriginalPath = _path2.default.resolve(baseUrl, 'template', dir, 'index_js');
 	    var indexSavePath = _path2.default.resolve('./src', dir, name, 'index.js');
-	    copyFile(indexOriginalPath, indexSavePath, _ReplacePattern2.default.createInstance(pattern), function () {
+	    copyFile(indexOriginalPath, indexSavePath, pattern, function () {
 	      console.log('create file index.js');
 	    });
 	
 	    var classOriginalPath = _path2.default.resolve(baseUrl, 'template', dir, 'Demo_js');
 	    var classSavePath = _path2.default.resolve('./src', dir, name, className + '.js');
-	    copyFile(classOriginalPath, classSavePath, _ReplacePattern2.default.createInstance(pattern), function () {
+	    copyFile(classOriginalPath, classSavePath, pattern, function () {
 	      console.log('create file ' + className + '.js');
 	    });
 	
 	    var cssOriginalPath = _path2.default.resolve(baseUrl, 'template', dir, 'Demo_less');
 	    var cssSavePath = _path2.default.resolve('./src', dir, name, className + '.less');
-	    copyFile(cssOriginalPath, cssSavePath, _ReplacePattern2.default.createInstance(pattern), function () {
+	    copyFile(cssOriginalPath, cssSavePath, pattern, function () {
 	      console.log('create file ' + className + '.less');
 	    });
 	  } catch (e) {
@@ -253,17 +303,44 @@ require("source-map-support").install();
 	}
 	
 	function copyFile(from, to, pattern, callback) {
-	  var original = _fs2.default.createReadStream(from);
-	  var transferred = _fs2.default.createWriteStream(to);
-	  original.pipe(pattern).pipe(transferred).on('finish', function () {
-	    callback && callback();
-	  });
+	  try {
+	    var filename = _path2.default.parse(from).name;
+	    if (_fsExtra2.default.statSync(from).isDirectory()) {
+	      if (!_fsExtra2.default.existsSync(to)) {
+	        _fsExtra2.default.mkdirSync(_path2.default.resolve(to));
+	      }
+	      var files = _fsExtra2.default.readdirSync(from);
+	      for (var i = 0; i < files.length; i++) {
+	        copyFile(_path2.default.resolve(from, files[i]), _path2.default.resolve(to, files[i]), pattern, callback);
+	      }
+	    } else {
+	      var rs = _fsExtra2.default.createReadStream(from);
+	      var ws = _fsExtra2.default.createWriteStream(to);
+	      rs.pipe(_ReplacePattern2.default.createInstance(pattern)).pipe(ws);
+	      // rs.on('end', function() {
+	      //   callback && callback(from, to);
+	      // });
+	    }
+	  } catch (e) {
+	    console.dir(e);
+	  }
 	}
 	
+	/*function copyFile(from, to, pattern, callback){
+	  let original = fs.createReadStream(from);
+	  let transferred = fs.createWriteStream(to);
+	  original
+	    .pipe(pattern)
+	    .pipe(transferred)
+	    .on('finish', () => {
+	      callback && callback();
+	    });
+	}*/
+	
 	function checkFolderStruct() {
-	  var srcExist = _fs2.default.existsSync('./src');
-	  var pagesDirExist = _fs2.default.existsSync('./src/pages');
-	  var componentDirExist = _fs2.default.existsSync('./src/components');
+	  var srcExist = _fsExtra2.default.existsSync('./src');
+	  var pagesDirExist = _fsExtra2.default.existsSync('./src/pages');
+	  var componentDirExist = _fsExtra2.default.existsSync('./src/components');
 	  return srcExist && pagesDirExist && componentDirExist;
 	}
 	
@@ -2707,12 +2784,12 @@ require("source-map-support").install();
 
 /***/ },
 /* 71 */
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
+/*!***************************!*\
+  !*** external "fs-extra" ***!
+  \***************************/
 /***/ function(module, exports) {
 
-	module.exports = require("fs");
+	module.exports = require("fs-extra");
 
 /***/ },
 /* 72 */
@@ -2732,7 +2809,7 @@ require("source-map-support").install();
 
 	module.exports = {
 		"name": "neo-tool",
-		"version": "0.0.13",
+		"version": "0.0.14",
 		"description": "neo脚手架工具集",
 		"main": "webpack.config.js",
 		"scripts": {
@@ -2767,8 +2844,9 @@ require("source-map-support").install();
 		},
 		"dependencies": {
 			"commander": "^2.9.0",
-			"string-template": "^1.0.0",
-			"source-map-support": "^0.4.4"
+			"fs-extra": "^2.0.0",
+			"source-map-support": "^0.4.4",
+			"string-template": "^1.0.0"
 		}
 	};
 

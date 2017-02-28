@@ -6,6 +6,12 @@
   neo脚手架工具集
   
 ### Usage
+##### neo init
+初始化一个项目
+```
+$ neo init myproject
+```
+会在当前目录新建一个前端工程
 
 ##### noe page
 根据模版创建新页面
@@ -13,11 +19,13 @@
 $ neo p index
 ```
 
+##### neo c
 创建新组件
 ```
 $ neo c modal
 ```
 
+##### neo --help
 查看帮助
 ```
 $ neo --help
