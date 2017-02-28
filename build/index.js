@@ -2809,7 +2809,7 @@ require("source-map-support").install();
 
 	module.exports = {
 		"name": "neo-tool",
-		"version": "0.0.13",
+		"version": "0.0.14",
 		"description": "neo脚手架工具集",
 		"main": "webpack.config.js",
 		"scripts": {
