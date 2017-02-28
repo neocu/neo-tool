@@ -1,0 +1,2 @@
+# {moduleName}
+wisite {name}

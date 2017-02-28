@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "string-template": "^1.0.0",
-    "source-map-support": "^0.4.4"
+    "fs-extra": "^2.0.0",
+    "source-map-support": "^0.4.4",
+    "string-template": "^1.0.0"
   }
 }
